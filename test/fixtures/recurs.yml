@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  recurs: false
+  {: 
+  false}: MyString
+  frequency: MyString
+  daypattern: MyString
+  enddate: 2015-08-05
+  latestdate: 2015-08-05
+  nextdate: 2015-08-05
+  todo_id: 
+
+two:
+  recurs: false
+  {: 
+  false}: MyString
+  frequency: MyString
+  daypattern: MyString
+  enddate: 2015-08-05
+  latestdate: 2015-08-05
+  nextdate: 2015-08-05
+  todo_id: 

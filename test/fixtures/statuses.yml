@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  notstarted: false
+  inprogress: false
+  forreview: false
+  delayed: false
+  complete: false
+  todo_id: 
+
+two:
+  notstarted: false
+  inprogress: false
+  forreview: false
+  delayed: false
+  complete: false
+  todo_id: 

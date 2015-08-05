@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Notstarted:</strong>
+  <%= @status.notstarted %>
+</p>
+
+<p>
+  <strong>Inprogress:</strong>
+  <%= @status.inprogress %>
+</p>
+
+<p>
+  <strong>Forreview:</strong>
+  <%= @status.forreview %>
+</p>
+
+<p>
+  <strong>Delayed:</strong>
+  <%= @status.delayed %>
+</p>
+
+<p>
+  <strong>Complete:</strong>
+  <%= @status.complete %>
+</p>
+
+<p>
+  <strong>Todo:</strong>
+  <%= @status.todo %>
+</p>
+
+<%= link_to 'Edit', edit_status_path(@status) %> |
+<%= link_to 'Back', statuses_path %>
