@@ -1,23 +1,26 @@
-<h1>Listing projects</h1>
+<div class="page-header">
+  <h1>Projects</h1>
+  <%= link_to 'Create New Project', new_project_path, remote: true %>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @projects.each do |project| %>
 
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= project.name.titleize %> <br><small><%= project.description %></small></br></h3>
+    <%= link_to 'Edit', edit_project_path(project), remote: true %> <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+  <div class="panel-body">
+    <% if project.todos.count == 0 %>
+      There are no todos for this project.
+    <% else %>
+      <% project.todos.each do |todo| %>
+        <strong><%= todo.name %></strong> <%= todo.details %>
+      <% end %>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>
 
-<br>
+<% end %>
 
-<%= link_to 'New Project', new_project_path %>
+

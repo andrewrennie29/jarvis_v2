@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150805061632) do
+ActiveRecord::Schema.define(version: 20150810054539) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20150805061632) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "isactive",    default: true
+    t.string   "slug"
   end
 
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
@@ -74,7 +76,6 @@ ActiveRecord::Schema.define(version: 20150805061632) do
     t.time     "timerequired"
     t.integer  "category_id"
     t.integer  "project_id"
-    t.integer  "user_id"
     t.integer  "status_id"
     t.integer  "recur_id"
     t.datetime "created_at"
@@ -85,7 +86,6 @@ ActiveRecord::Schema.define(version: 20150805061632) do
   add_index "todos", ["project_id"], name: "index_todos_on_project_id", using: :btree
   add_index "todos", ["recur_id"], name: "index_todos_on_recur_id", using: :btree
   add_index "todos", ["status_id"], name: "index_todos_on_status_id", using: :btree
-  add_index "todos", ["user_id"], name: "index_todos_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username"

@@ -1,0 +1,40 @@
+
+
+<div class = "page-header">
+<h1>Welcome to Jarvis</h1>
+Existing users can sign in below, or to register click <%= link_to 'here', new_user_path, remote: true %>.
+</div>
+
+<% unless flash[:alert].nil? %>
+	
+	<div class="alert alert-danger alert-dismissible" role="alert">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  <%= flash[:alert].html_safe %>
+	</div>
+
+<% end %>
+
+<%= form_tag sessions_path, class: "form-inline" do %>
+	<div class="form-group">
+		<div class="input-group">
+			<div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
+			<%= text_field_tag :username, nil, class: "form-control", placeholder: "Enter Username..." %>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="input-group">
+			<div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
+			<%= password_field_tag :password, nil, class: "form-control", placeholder: "Enter Password..." %>
+		</div>
+	</div>
+
+<%= submit_tag "Sign In", :class => "btn btn-primary" %>
+<% end %>
+
+<div id="new-user-modal" class="modal fade">
+	<div class="modal-dialog">
+		<div id="inner-new-user-modal" class="modal-content"></div>
+	</div>
+</div>
+
