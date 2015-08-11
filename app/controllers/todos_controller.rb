@@ -4,7 +4,9 @@ class TodosController < ApplicationController
   # GET /todos
   # GET /todos.json
   def index
-    @todos = User.find_by_id(session[:user_id]).todos
+    unless session[:user_id].nil?
+      @todos = User.find_by_id(session[:user_id]).todos
+    end
   end
 
   # GET /todos/1
@@ -69,6 +71,6 @@ class TodosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def todo_params
-      params[:todo].permit(:name, :details, :project_id)
+      params[:todo].permit(:name, :details, :duedate, :project_id)
     end
 end

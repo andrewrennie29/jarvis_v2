@@ -1,23 +1,63 @@
-<h1>Listing todos</h1>
+<script type="text/javascript">
+$(document).ready(function() {    
+  $('input[type="radio"][data-behavior="clickable"]').click(function(evt){
+    alert("you chose the option: " + $(this).val());
+  });
+});
+</script>
+
+<div class="page-header">
+  <h1>Get Stuff Done</h1>
+</div>
 
 <table>
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @todos.each do |todo| %>
-      <tr>
-        <td><%= link_to 'Show', todo %></td>
-        <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
-        <td><%= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <% unless session[:user_id].nil? %>
+      <% @todos.each do |todo| %>
+        <tr>
+          <td><%= link_to 'Show', todo %></td>
+          <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
+          <td><%= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        
+          <td>
+            <%= form_for todo.status  do |f| %>
+              <div class="btn-group btn-group-xs" data-toggle="buttons">
+              <label class="btn btn-default<% if todo.status.notstarted %> active<% end %>">
+              <%= f.radio_button :id, "notstarted", :id=>"notstarted", :autocomplete => "off", :checked => todo.status.notstarted, onClick: "alert('hi TRUE!');" %>N
+              </label>
+              <label class="btn btn-default<% if todo.status.inprogress %> active<% end %>">
+              <%= f.radio_button :id, "inprogress", :id=>"inprogress", :autocomplete => "off", :checked => todo.status.inprogress, onClick: "alert('hi TRUE!');" %>P
+              </label>
+              <label class="btn btn-default<% if todo.status.forreview %> active<% end %>">
+              <%= f.radio_button :id, "forreview", :id=>"forreview", :autocomplete => "off", :checked => todo.status.forreview, onClick: "alert('hi TRUE!');" %>R
+              </label>
+              <label class="btn btn-default<% if todo.status.delayed %> active<% end %>">
+              <%= f.radio_button :id, "delayed", :id=>"delayed", :autocomplete => "off", :checked => todo.status.delayed, onClick: "alert('hi TRUE!');" %>D
+              </label>
+              <label class="btn btn-default<% if todo.status.complete %> active<% end %>">
+              <%= f.radio_button :id, "complete", :id=>"complete", :autocomplete => "off", :checked => todo.status.complete, onClick: "alert('hi TRUE!');" %>C
+              </label>
+              </div>
+            <% end %>
+            
+              
+            
+          
+          </td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
 <br>
+
+
 
 <%= link_to 'New Todo', new_todo_path, remote: true %>

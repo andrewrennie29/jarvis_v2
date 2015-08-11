@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150810054539) do
+ActiveRecord::Schema.define(version: 20150810204435) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -55,11 +55,11 @@ ActiveRecord::Schema.define(version: 20150810054539) do
   add_index "recurs", ["todo_id"], name: "index_recurs_on_todo_id", using: :btree
 
   create_table "statuses", force: true do |t|
-    t.boolean  "notstarted"
-    t.boolean  "inprogress"
-    t.boolean  "forreview"
-    t.boolean  "delayed"
-    t.boolean  "complete"
+    t.boolean  "notstarted", default: true
+    t.boolean  "inprogress", default: false
+    t.boolean  "forreview",  default: false
+    t.boolean  "delayed",    default: false
+    t.boolean  "complete",   default: false
     t.integer  "todo_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -76,16 +76,12 @@ ActiveRecord::Schema.define(version: 20150810054539) do
     t.time     "timerequired"
     t.integer  "category_id"
     t.integer  "project_id"
-    t.integer  "status_id"
-    t.integer  "recur_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "todos", ["category_id"], name: "index_todos_on_category_id", using: :btree
   add_index "todos", ["project_id"], name: "index_todos_on_project_id", using: :btree
-  add_index "todos", ["recur_id"], name: "index_todos_on_recur_id", using: :btree
-  add_index "todos", ["status_id"], name: "index_todos_on_status_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username"
