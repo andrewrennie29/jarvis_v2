@@ -1,9 +1,4 @@
 <script type="text/javascript">
-$(document).ready(function() {    
-  $('input[type="radio"][data-behavior="clickable"]').click(function(evt){
-    alert("you chose the option: " + $(this).val());
-  });
-});
 </script>
 
 <div class="page-header">
@@ -27,21 +22,24 @@ $(document).ready(function() {
         
           <td>
             <%= form_for todo.status  do |f| %>
-              <div class="btn-group btn-group-xs" data-toggle="buttons">
+              <div class="btn-group btn-group-xs" data-toggle="buttons" onClick="this.parentNode.submit();">
               <label class="btn btn-default<% if todo.status.notstarted %> active<% end %>">
-              <%= f.radio_button :id, "notstarted", :id=>"notstarted", :autocomplete => "off", :checked => todo.status.notstarted, onClick: "alert('hi TRUE!');" %>N
+              <%= f.radio_button :id, "notstarted", :id=>"notstarted", :autocomplete => "off", :checked => todo.status.notstarted %>N
               </label>
               <label class="btn btn-default<% if todo.status.inprogress %> active<% end %>">
-              <%= f.radio_button :id, "inprogress", :id=>"inprogress", :autocomplete => "off", :checked => todo.status.inprogress, onClick: "alert('hi TRUE!');" %>P
+              <%= f.radio_button :id, "inprogress", :id=>"inprogress", :autocomplete => "off", :checked => todo.status.inprogress %>P
               </label>
               <label class="btn btn-default<% if todo.status.forreview %> active<% end %>">
-              <%= f.radio_button :id, "forreview", :id=>"forreview", :autocomplete => "off", :checked => todo.status.forreview, onClick: "alert('hi TRUE!');" %>R
+              <%= f.radio_button :id, "forreview", :id=>"forreview", :autocomplete => "off", :checked => todo.status.forreview,
+              :onClick => "this.parentNode.submit();" %>R
               </label>
               <label class="btn btn-default<% if todo.status.delayed %> active<% end %>">
-              <%= f.radio_button :id, "delayed", :id=>"delayed", :autocomplete => "off", :checked => todo.status.delayed, onClick: "alert('hi TRUE!');" %>D
+              <%= f.radio_button :id, "delayed", :id=>"delayed", :autocomplete => "off", :checked => todo.status.delayed, 
+              :onClick => "this.parentNode.submit();" %>D
               </label>
               <label class="btn btn-default<% if todo.status.complete %> active<% end %>">
-              <%= f.radio_button :id, "complete", :id=>"complete", :autocomplete => "off", :checked => todo.status.complete, onClick: "alert('hi TRUE!');" %>C
+              <%= f.radio_button :id, "complete", :id=>"complete", :autocomplete => "off", :checked => todo.status.complete, 
+              :onClick => "this.parentNode.submit();" %>C
               </label>
               </div>
             <% end %>
