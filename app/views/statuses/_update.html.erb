@@ -1,0 +1,35 @@
+<%= form_for status do |f| %>
+  <%= f.hidden_field :id %>
+  <div class="btn-group btn-group-xs" data-toggle="buttons" onchange="this.parentNode.submit();">
+    <label class="btn btn-default<% if status.notstarted %> active<% end %>">
+      <%= f.radio_button :id, status.notstarted, 
+                          :name => "status[notstarted]", 
+                          :autocomplete => "off", 
+                          :checked => status.notstarted %>N
+    </label>
+    <label class="btn btn-default<% if status.inprogress %> active<% end %>">
+      <%= f.radio_button :id, status.inprogress, 
+                          :name => "status[inprogress]", 
+                          :autocomplete => "off", 
+                          :checked => status.inprogress %>P
+    </label>
+    <label class="btn btn-default<% if status.forreview %> active<% end %>">
+      <%= f.radio_button :id, status.forreview, 
+                          :name => "status[forreview]", 
+                          :autocomplete => "off", 
+                          :checked => status.forreview %>R
+    </label>
+    <label class="btn btn-default<% if status.delayed %> active<% end %>">
+      <%= f.radio_button :id, status.delayed, 
+                          :name => "status[delayed]", 
+                          :autocomplete => "off", 
+                          :checked => status.delayed %>D
+    </label>
+    <label class="btn btn-default<% if status.complete %> active<% end %>">
+      <%= f.radio_button :id, status.complete, 
+                          :name => "status[complete]", 
+                          :autocomplete => "off", 
+                          :checked => status.complete %>C
+    </label>
+  </div>
+<% end %>

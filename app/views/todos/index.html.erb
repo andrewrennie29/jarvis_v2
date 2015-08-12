@@ -2,64 +2,11 @@
   <h1>Get Stuff Done</h1>
 </div>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
-
-  <tbody>
     <% unless session[:user_id].nil? %>
-      <% @todos.each do |todo| %>
-        <tr>
-          <td><%= link_to 'Show', todo %></td>
-          <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
-          <td><%= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        
-          <td>
-          <%= form_for todo.status do |f| %>
-              <%= f.hidden_field :id %>
-              <div class="btn-group btn-group-xs" data-toggle="buttons" >
-              <label class="btn btn-default<% if todo.status.notstarted %> active<% end %>">
-              <%= f.radio_button :id, todo.status.notstarted, 
-                                  :name => "status[notstarted]", 
-                                  :autocomplete => "off", 
-                                  :checked => todo.status.notstarted %>N
-              </label>
-              <label class="btn btn-default<% if todo.status.inprogress %> active<% end %>">
-              <%= f.radio_button :id, todo.status.inprogress, 
-                                  :name => "status[inprogress]", 
-                                  :autocomplete => "off", 
-                                  :checked => todo.status.inprogress %>P
-              </label>
-              <label class="btn btn-default<% if todo.status.forreview %> active<% end %>">
-              <%= f.radio_button :id, todo.status.forreview, 
-                                  :name => "status[forreview]", 
-                                  :autocomplete => "off", 
-                                  :checked => todo.status.forreview %>R
-              </label>
-              <label class="btn btn-default<% if todo.status.delayed %> active<% end %>">
-              <%= f.radio_button :id, todo.status.delayed, 
-                                  :name => "status[delayed]", 
-                                  :autocomplete => "off", 
-                                  :checked => todo.status.delayed %>D
-              </label>
-              <label class="btn btn-default<% if todo.status.complete %> active<% end %>">
-              <%= f.radio_button :id, todo.status.complete, 
-                                  :name => "status[complete]", 
-                                  :autocomplete => "off", 
-                                  :checked => todo.status.complete %>C
-              </label>
-              </div>
-            <%= f.submit "Submit", :disable_with => 'Submiting...' %>
-          <% end %>
-          </td>
-        </tr>
-      <% end %>
+      
+      <%= render partial: 'todos/list', locals: { todos: @todos } %>
+
     <% end %>
-  </tbody>
-</table>
 
 <br>
 

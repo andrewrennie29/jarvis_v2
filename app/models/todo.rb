@@ -8,6 +8,8 @@ class Todo < ActiveRecord::Base
 
 	private
 	def createstatus
-		Status.create(:todo_id => id)
+		if self.status.nil?
+			Status.create(:todo_id => id)
+		end
 	end
 end
