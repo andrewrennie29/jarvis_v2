@@ -1,0 +1,1 @@
+$("#todostatus<%= todo.id %>").html("<%= escape_javascript(render partial: 'statuses/update', locals: { status: todo.status }) %>");

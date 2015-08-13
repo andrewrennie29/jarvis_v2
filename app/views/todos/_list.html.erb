@@ -8,7 +8,7 @@
         <div class = "col-md-1"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></div>
         <div class = "col-md-1"><%= link_to '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>'.html_safe, todo, method: :delete, data: { confirm: 'Are you sure?' } %></div>
       </div>
-      <div class = "col-md-2"><%= render partial: 'statuses/update', locals: { status: todo.status } %></div>
+      <div class = "col-md-2" id = "todostatus<%= todo.id %>"><%= render partial: 'statuses/update', locals: { status: todo.status } %></div>
       <div class = "col-md-3">
       <%= form_for todo do |f| %>
         <script type="text/javascript">
