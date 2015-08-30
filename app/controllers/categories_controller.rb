@@ -10,6 +10,9 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
+    unless session[:user_id].nil?
+      @categorytodos = User.find_by_id(session[:user_id]).todos.joins(:category, :status).where('categories.name = ?', params[:name]).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
+    end
   end
 
   # GET /categories/new
@@ -64,7 +67,7 @@ class CategoriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
-      @category = Category.find(params[:id])
+      @category = Category.where(:name => params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

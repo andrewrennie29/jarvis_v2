@@ -8,9 +8,13 @@ class Project < ActiveRecord::Base
 		slug
 	end
 
+	def update_slug
+		
+	end	
+
 private
-		def create_slug
-			self.slug = name.titleize.parameterize
-		end
+	def create_slug
+		self.slug = [user_id, name.parameterize].join("-")
+	end
 
 end

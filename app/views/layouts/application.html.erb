@@ -20,8 +20,8 @@
   <div class = "row">
 
 		<% unless flash.notice.nil? %> <div class="alert alert-success" role="alert"><%= flash.notice %></div> <% end %>
-		<div class = "col-md-9"> <% if session[:user_id].nil? %> <%= render partial: 'sessions/login' %> <% else %> <%= yield %> <% end %> </div>
-		<div class = "col-md-3"> <%= render partial: 'layouts/sidebar' %> </div>
+		<div class = "col-md-10"> <% if session[:user_id].nil? %> <%= render partial: 'sessions/login' %> <% else %> <%= yield %> <% end %> </div>
+		<div class = "col-md-2"> <%= render partial: 'layouts/sidebar' %> </div>
 
 	</div>
 </div>
@@ -35,6 +35,12 @@
 <div id="new-todo-modal" class="modal fade">
 	<div class="modal-dialog">
 		<div id="inner-new-todo-modal" class="modal-content"></div>
+	</div>
+</div>
+
+<div id="new-comment-modal" class="modal fade">
+	<div class="modal-dialog">
+		<div id="inner-new-comment-modal" class="modal-content"></div>
 	</div>
 </div>
 

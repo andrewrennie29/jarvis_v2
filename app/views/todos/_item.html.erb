@@ -1,0 +1,33 @@
+<div class = "row" id='<%= todo.id %>' >
+  <div class = "col-md-8">
+      <dl>
+      <dt>
+      <div class = "col-md-8"><%= link_to todo.name.titleize, todo, remote: true %><% if todo.duedate < Date.today %> <span class="label label-danger">Overdue</span><% end %></div>
+      <div class = "col-md-2"><span class="label label-default"><%= todo.project.name %> <%= todo.id %></span></div>
+      <div class = "col-md-1"><%= link_to '<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>'.html_safe, new_todo_comment_path(todo, @comment), remote: true %></div>
+      <div class = "col-md-1"><%= link_to '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>'.html_safe, todo, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      </dt>
+      <dd>
+      <div class = "col-md-10"><%= todo.details %></div>
+      </dd>
+      </dl>
+  </div>
+  <div class = "col-md-2" id = "todostatus<%= todo.id %>"><%= render partial: 'statuses/update', locals: { status: todo.status } %></div>
+  <div class = "col-md-2">
+  <%= form_for todo do |f| %>
+    <script type="text/javascript">
+      onChange = "this.form.submit();"
+      $(document).ready(function(){
+      $('#tododatetimepicker<%= todo.id %>').datetimepicker({ showTodayButton: true, defaultDate: "<%= Date.today.strftime("%m/%d/%Y") %>", format: "YYYY-MM-DD" });
+      });
+    </script>
+    <div class="input-group input-group-sm" id='tododatetimepicker<%= todo.id %>'>
+      <span class="input-group-addon" id="basic-addon<%= todo.id %>">
+        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+      </span>
+      <%= f.text_field :assigneddate, :class => "form-control" %>
+    </div>
+  <% end %>
+  </div>
+</div>
+<br>

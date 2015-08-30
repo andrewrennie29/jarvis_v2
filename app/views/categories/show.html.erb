@@ -1,9 +1,9 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h1><%= params[:name].titleize %> Category Todos</h1>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @category.name %>
-</p>
+    <% unless session[:user_id].nil? %>
+      
+      <%= render partial: 'todos/list', locals: { todos: @categorytodos } %>
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+    <% end %>

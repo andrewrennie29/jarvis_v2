@@ -1,0 +1,13 @@
+<% if Comment.where(:todo_id => params[:todo_id]).count == 0 %>
+	No comments, use the text box below to add a comment for this task.</br>
+<% else %>
+	<% Comment.where(:todo_id => params[:todo_id]).order(created_at: :desc).each do |comment| %>
+		<div class = "row">
+			<div class = "col-md-8"><%= comment.details %></div>
+			<div class = "col-md-4"><p class = "text-right">
+				<small><i><%= comment.created_at.strftime('%a %e %b %Y %H:%M') %></i></small> 
+				<%= link_to '&times;'.html_safe, '/' %></p>
+			</div>
+		</div></p>
+	<% end %>
+<% end %>

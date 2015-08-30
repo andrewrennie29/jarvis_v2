@@ -2,21 +2,23 @@ Rails.application.routes.draw do
   
   root 'todos#index'
 
-  resources :recurs
-
-  resources :statuses
-
-  resources :users
-
-  resources :comments
-
-  resources :categories
+  resources :categories, param: :name
 
   resources :projects, param: :slug
 
-  resources :todos
+  resources :recurs
 
   resources :sessions
+
+  resources :statuses
+
+  resources :todos do
+    resources :comments
+  end
+
+  resources :users
+
+  post 'todos/navbarcreate' => 'todos#navbarcreate'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

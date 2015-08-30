@@ -15,7 +15,7 @@
       There are no todos for this project.
     <% else %>
       <% project.todos.each do |todo| %>
-        <strong><%= todo.name %></strong> <%= todo.details %>
+        <%= render partial: 'todos/item', locals: { todo: todo } %>
       <% end %>
     <% end %>
   </div>
