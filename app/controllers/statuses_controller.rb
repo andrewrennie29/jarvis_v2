@@ -42,15 +42,17 @@ class StatusesController < ApplicationController
   # PATCH/PUT /statuses/1
   # PATCH/PUT /statuses/1.json
   def update
-    respond_to do |format|
-      if @status.update_status(status_params)
-        format.html { redirect_to @status, notice: 'Status was successfully updated.' }
-        format.json { render :show, status: :ok, location: @status }
-      else
-        format.html { render :edit }
-        format.json { render json: @status.errors, status: :unprocessable_entity }
-      end
-    end
+    @status.update_status(status_params)
+
+    #respond_to do |format|
+    #  if @status.update_status(status_params)
+    #    format.html { redirect_to @status, notice: 'Status was successfully updated.' }
+    #    format.json { render :show, status: :ok, location: @status }
+    #  else
+    #    format.html { render :edit }
+    #    format.json { render json: @status.errors, status: :unprocessable_entity }
+    #  end
+    #end
   end
 
   # DELETE /statuses/1

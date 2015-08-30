@@ -3,7 +3,7 @@
       <dl>
       <dt>
       <div class = "col-md-8"><%= link_to todo.name.titleize, todo, remote: true %><% if todo.duedate < Date.today %> <span class="label label-danger">Overdue</span><% end %></div>
-      <div class = "col-md-2"><span class="label label-default"><%= todo.project.name %> <%= todo.id %></span></div>
+      <div class = "col-md-2"><%= link_to todo.project do %><span class="label label-default"><%= todo.project.name %> <%= todo.id %></span><% end %></div>
       <div class = "col-md-1"><%= link_to '<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>'.html_safe, new_todo_comment_path(todo, @comment), remote: true %></div>
       <div class = "col-md-1"><%= link_to '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>'.html_safe, todo, method: :delete, data: { confirm: 'Are you sure?' } %></div>
       </dt>
@@ -12,7 +12,7 @@
       </dd>
       </dl>
   </div>
-  <div class = "col-md-2" id = "todostatus<%= todo.id %>"><%= render partial: 'statuses/update', locals: { status: todo.status } %></div>
+  <div class = "col-md-2" id = "todostatus<%= todo.status.id %>"><%= render partial: 'statuses/update', locals: { status: todo.status } %></div>
   <div class = "col-md-2">
   <%= form_for todo do |f| %>
     <script type="text/javascript">

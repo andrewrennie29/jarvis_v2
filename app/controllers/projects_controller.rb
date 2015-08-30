@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+     @projecttodos = Project.todo.where(:slug => params[:id])
   end
 
   # GET /projects/new
