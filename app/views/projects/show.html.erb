@@ -1,5 +1,5 @@
-<div class="page-header">
-  <h1><%= params[:name].titleize %> Category Todos</h1>
+<div class="page-header" id = "projectheader">
+  <%= render partial: 'projects/projectstatus' %>
 </div>
 
     <% unless session[:user_id].nil? %>
