@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150810204435) do
+ActiveRecord::Schema.define(version: 20150901104011) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20150810204435) do
     t.date     "duedate"
     t.date     "assigneddate"
     t.integer  "importance"
-    t.time     "timerequired"
+    t.integer  "points"
     t.integer  "category_id"
     t.integer  "project_id"
     t.datetime "created_at"

@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find_by_slug(params[:slug])
     @projecttodos = @project.todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
-    @pointsremaining = @projecttodos.where('statuses.complete = false').sum(:timerequired)
+    @pointsremaining = @projecttodos.where('statuses.complete = false').sum(:points)
     @completedtodos = @projecttodos.where('statuses.complete = true').count
     @inprogresstodos = @projecttodos.where('statuses.complete = false and statuses.notstarted = false').count
     @overduetodos = @projecttodos.where('statuses.complete = false and todos.duedate < curdate()').count

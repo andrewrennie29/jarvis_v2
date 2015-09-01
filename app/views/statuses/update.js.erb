@@ -1,1 +1,1 @@
-$('#todostatus<%= params[:id] %>').html("<%= escape_javascript(render partial: 'statuses/updatestatus', locals: { status: Status.find_by_id(params[:id]) }) %>");
+<%= render "save" %>

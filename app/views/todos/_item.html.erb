@@ -2,11 +2,26 @@
   <div class = "col-md-8">
       <dl>
       <dt>
-      <div class = "col-md-8"><span class="glyphicon glyphicon-chevron-right text-primary"></span><% if todo.importance == 3 %> <span class="glyphicon glyphicon-exclamation-sign text-danger" title = "High Priority"></span><% end %> <%= link_to todo.name.titleize, todo, remote: true %><% if todo.duedate < Date.today and todo.status.complete == false %> <span class="label label-danger">Overdue</span><% end %></div>
-      <div class = "col-md-2"><%= link_to todo.project do %><span class="label label-default"><%= todo.project.name %> <%= todo.id %></span><% end %></div>
+      <div class = "col-md-10">
+        <span class="glyphicon glyphicon-chevron-right text-primary"></span>
+        <% if todo.importance == 3 %> <span class="glyphicon glyphicon-exclamation-sign text-danger" title = "High Priority"></span><% end %> <%= link_to todo.name.titleize, todo, remote: true %>
+      </div>
       <div class = "col-md-1"><%= link_to '<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>'.html_safe, new_todo_comment_path(todo, @comment), remote: true %></div>
       <div class = "col-md-1"><%= link_to '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>'.html_safe, todo, method: :delete, data: { confirm: 'Are you sure?' } %></div>
       </dt>
+      <dd>
+      <div class = "col-md-10">
+        <% if todo.status.complete == false %>
+          <% if todo.duedate < Date.today %>
+          <span class="label label-danger">Overdue <%= distance_of_time_in_words_to_now(todo.duedate) %></span>
+          <% else %>
+           <span class="label label-default">Due <%= distance_of_time_in_words_to_now(todo.duedate) %></span>
+          <% end %>
+        <% end %>
+        <span class="label label-default"><%= todo.points %> points</span>
+        <%= link_to todo.project do %><span class="label label-default"><%= todo.project.name %> <%= todo.id %></span><% end %>
+      </div>
+      </dd>
       <dd>
       <div class = "col-md-10"><%= todo.details %></div>
       </dd>

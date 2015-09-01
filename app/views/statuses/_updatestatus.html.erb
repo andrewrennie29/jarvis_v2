@@ -1,35 +1,40 @@
-<%= form_for status, :remote => true, :authenticity_token => true do |f| %>
+<%= form_for status, remote: true, :authenticity_token => true, :html => { :id => 'status-update-form-' + status.id.to_s } do |f| %>
   <%= f.hidden_field :id %>
-  <div class="btn-group btn-group-xs" data-toggle="buttons" onchange="this.parentNode.submit();">
+  <div class="btn-group btn-group-xs" data-toggle="buttons">
     <label class="btn btn-default<% if status.notstarted %> active<% end %>">
       <%= f.radio_button :id, status.notstarted, 
                           :name => "status[notstarted]", 
                           :autocomplete => "off", 
-                          :checked => status.notstarted %>N
+                          :checked => status.notstarted,
+                          :onchange => '$("#status-update-form-'+status.id.to_s+'").submit();' %>N
     </label>
     <label class="btn btn-default<% if status.inprogress %> active<% end %>">
       <%= f.radio_button :id, status.inprogress, 
                           :name => "status[inprogress]", 
                           :autocomplete => "off", 
-                          :checked => status.inprogress %>P
+                          :checked => status.inprogress,
+                          :onchange => '$("#status-update-form-'+status.id.to_s+'").submit();' %>P
     </label>
     <label class="btn btn-default<% if status.forreview %> active<% end %>">
       <%= f.radio_button :id, status.forreview, 
                           :name => "status[forreview]", 
                           :autocomplete => "off", 
-                          :checked => status.forreview %>R
+                          :checked => status.forreview,
+                          :onchange => '$("#status-update-form-'+status.id.to_s+'").submit();' %>R
     </label>
     <label class="btn btn-default<% if status.delayed %> active<% end %>">
       <%= f.radio_button :id, status.delayed, 
                           :name => "status[delayed]", 
                           :autocomplete => "off", 
-                          :checked => status.delayed %>D
+                          :checked => status.delayed,
+                          :onchange => '$("#status-update-form-'+status.id.to_s+'").submit();' %>D
     </label>
     <label class="btn btn-default<% if status.complete %> active<% end %>">
       <%= f.radio_button :id, status.complete, 
                           :name => "status[complete]", 
                           :autocomplete => "off", 
-                          :checked => status.complete %>C
+                          :checked => status.complete,
+                          :onchange => '$("#status-update-form-'+status.id.to_s+'").submit();' %>C
     </label>
   </div>
 <% end %>
