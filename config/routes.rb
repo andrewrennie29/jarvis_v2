@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   
+  resources :followups do
+    put 'complete' 
+    get 'complete'
+  end
+
   root 'todos#index'
 
   resources :categories, param: :name

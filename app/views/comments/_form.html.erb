@@ -24,9 +24,22 @@
       </div>
       <div class="modal-footer">
         <%= f.hidden_field :todo_id, :value => params[:todo_id] %>
-        <%= f.text_area :details, :class => "form-control", :placeholder => "Enter comment" %></br>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <div class = "row">
+          <div class = "col-md-9">
+            <%= f.text_area :details, :class => "form-control", :placeholder => "Enter comment" %>
+          </div>
+          <div class = "col-md-3">
+            <div class="input-group input-group-sm">
+              <span class="input-group-addon">
+                <%= f.check_box 'followup', :class => "form-control", :name => 'followup' %>
+              </span>
+              <span class="input-group-addon" id="basic-addon">Follow Up</span>
+            </div>
+          </div>
+        </div></br>
         <%= f.submit "Create comment", :class => "btn btn-primary" %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        
       </div>
 
 <% end %>

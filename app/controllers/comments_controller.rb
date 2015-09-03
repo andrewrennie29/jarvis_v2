@@ -26,6 +26,10 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.create(comment_params)
 
+    if params[:followup]
+      Followup.create(:comment_id => @comment.id, :complete => false)
+    end
+
     #respond_to do |format|
     #  if @comment.save
     #    format.html { redirect_to @comment, notice: 'Comment was successfully created.' }

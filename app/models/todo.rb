@@ -6,6 +6,10 @@ class Todo < ActiveRecord::Base
 	has_many :comments
 	after_save :createstatus
 
+    def self.navnew
+        self.new
+    end
+
 	def self.statusobjects(options = {} )
 
 		defaults = { :user_id => nil,

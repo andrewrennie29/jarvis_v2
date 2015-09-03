@@ -1,0 +1,11 @@
+<% if followup.nil? %>
+	<span class="label label-info">Info</span>
+<% else %>
+	<% if followup.complete == true %>
+		<span class="label label-success">Complete</span>
+	<% else %>
+		<%= link_to followup_complete_path(followup.id), remote: true do %>
+			<span class="label label-warning">Follow Up</span>
+		<% end %>
+	<% end %>
+<% end %>

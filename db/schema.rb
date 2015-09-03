@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150901104011) do
+ActiveRecord::Schema.define(version: 20150903132425) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(version: 20150901104011) do
   end
 
   add_index "comments", ["todo_id"], name: "index_comments_on_todo_id", using: :btree
+
+  create_table "followups", force: true do |t|
+    t.boolean  "complete",   default: false
+    t.integer  "comment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "followups", ["comment_id"], name: "index_followups_on_comment_id", using: :btree
 
   create_table "projects", force: true do |t|
     t.text     "name"

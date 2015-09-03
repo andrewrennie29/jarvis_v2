@@ -1,0 +1,1 @@
+$("#followup<%= @followup.comment.id %>").html("<%= escape_javascript(render partial: 'followups/status', locals: { followup: @followup }) %>");

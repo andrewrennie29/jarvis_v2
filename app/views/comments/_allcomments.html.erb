@@ -3,7 +3,8 @@
 <% else %>
 	<% Comment.where(:todo_id => params[:todo_id]).order(created_at: :desc).each do |comment| %>
 		<div class = "row">
-			<div class = "col-md-8"><%= comment.details %></div>
+			<div class = "col-md-2" id="followup<%= comment.id %>"><%= render partial: 'followups/status', locals: { followup: comment.followup } %></div>
+			<div class = "col-md-6"><%= comment.details %></div>
 			<div class = "col-md-4"><p class = "text-right">
 				<small><i><%= comment.created_at.strftime('%a %e %b %Y %H:%M') %></i></small> 
 				<%= link_to '&times;'.html_safe, '/' %></p>
