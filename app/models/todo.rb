@@ -1,9 +1,9 @@
 class Todo < ActiveRecord::Base
 	belongs_to :project
 	belongs_to :category
-	has_one :status
-	has_one :recur
-	has_many :comments
+	has_one :status, dependent: :destroy
+	has_one :recur, dependent: :destroy
+	has_many :comments, dependent: :destroy
 	after_save :createstatus
 
 	def self.statusobjects(options = {} )

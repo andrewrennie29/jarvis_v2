@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.create(comment_params)
 
-    if params[:followup]
+    if params[:followup] == '1'
       Followup.create(:comment_id => @comment.id, :complete => false)
     end
 

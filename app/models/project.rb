@@ -2,7 +2,7 @@ class Project < ActiveRecord::Base
 	validates :slug, presence: true, uniqueness: { case_sensitive: false }
 	before_validation :create_slug
 	belongs_to :user
-	has_many :todos
+	has_many :todos, dependent: :destroy
 
 	def to_param
 		slug
