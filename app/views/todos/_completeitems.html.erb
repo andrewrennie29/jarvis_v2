@@ -1,0 +1,4 @@
+<h1><% if session[:active_project].nil? %> Get Stuff Done <% else %><%= @project.name.titleize %> Items<% end %> <small><%= @projectstatus[:completedtodos].to_s %> / <%= @projectstatus[:totaltodos].to_s %> Complete</small>
+</h1>
+<% unless session[:active_project].nil? %><h4><%= @project.description %></h4><% end %>
+

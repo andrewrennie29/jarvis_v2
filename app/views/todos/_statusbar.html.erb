@@ -1,0 +1,9 @@
+<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= number_to_percentage(statusobject[:completedtodos].to_f * 100 / statusobject[:totaltodos], precision: 0) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= number_to_percentage(statusobject[:completedtodos].to_f * 100 / statusobject[:totaltodos], precision: 0) %>;">
+    <% unless statusobject[:completedtodos] == 0 %><%= number_to_percentage(statusobject[:completedtodos].to_f * 100 / statusobject[:totaltodos], precision: 0) %> Complete<% end %>
+  </div>
+  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= number_to_percentage(statusobject[:inprogresstodos].to_f * 100 / statusobject[:totaltodos], precision: 0) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= number_to_percentage(statusobject[:inprogresstodos].to_f * 100 / statusobject[:totaltodos], precision: 0) %>">
+    <% unless statusobject[:inprogresstodos] == 0 %><%= number_to_percentage(statusobject[:inprogresstodos].to_f * 100 / statusobject[:totaltodos], precision: 0) %> In Progress<% end %>
+  </div>
+  <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="<%= number_to_percentage(statusobject[:overduetodos].to_f * 100 / statusobject[:totaltodos], precision: 0) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= number_to_percentage(statusobject[:overduetodos].to_f * 100 / statusobject[:totaltodos], precision: 0) %>">
+    <% unless statusobject[:overduetodos] == 0 %><%= number_to_percentage(statusobject[:overduetodos].to_f * 100 / statusobject[:totaltodos], precision: 0) %> Overdue<% end %>
+  </div>

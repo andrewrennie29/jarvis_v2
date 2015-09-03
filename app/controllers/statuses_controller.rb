@@ -44,7 +44,10 @@ class StatusesController < ApplicationController
   def update
 
     @status.update_status(status_params)
-    
+    unless session[:active_project].nil?
+      @project = Project.find_by_slug(session[:active_project])
+    end
+    @projectstatus = Todo.statusobjects(project_id: session[:active_project], user_id: session[:user_id])
     #respond_to do |format|
     #  if @status.update_status(status_params)
     #    format.html { redirect_to @status, notice: 'Status was successfully updated.' }

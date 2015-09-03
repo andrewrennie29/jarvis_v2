@@ -2,12 +2,14 @@
   <div class = "col-md-8">
       <dl>
       <dt>
-      <div class = "col-md-10">
+      <div class = "col-md-9">
         <span class="glyphicon glyphicon-chevron-right text-primary"></span>
         <% if todo.importance == 3 %> <span class="glyphicon glyphicon-exclamation-sign text-danger" title = "High Priority"></span><% end %> <%= link_to todo.name.titleize, todo, remote: true %>
       </div>
-      <div class = "col-md-1"><%= link_to '<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>'.html_safe, new_todo_comment_path(todo, @comment), remote: true %></div>
-      <div class = "col-md-1"><%= link_to '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>'.html_safe, todo, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <div class = "col-md-3">
+        <div class = "col-md-6"><%= link_to '<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>'.html_safe, new_todo_comment_path(todo, @comment), remote: true %> <small><%= todo.comments.count %></small></div>
+        <div class = "col-md-6"><%= link_to '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>'.html_safe, todo, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></div>
+      </div>
       </dt>
       <dd>
       <div class = "col-md-10">
@@ -18,7 +20,7 @@
            <span class="label label-default">Due <%= distance_of_time_in_words_to_now(todo.duedate) %></span>
           <% end %>
         <% end %>
-        <span class="label label-default"><%= todo.points %> points</span>
+        <span class="label label-default"><%= todo.points.to_s + ' point'.pluralize(todo.points) %></span>
         <%= link_to todo.project do %><span class="label label-default"><%= todo.project.name %> <%= todo.id %></span><% end %>
       </div>
       </dd>

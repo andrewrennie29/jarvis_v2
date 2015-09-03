@@ -2,7 +2,7 @@
   <%= f.hidden_field :id %>
   <div class="btn-group btn-group-xs" data-toggle="buttons">
     <label class="btn btn-default<% if status.notstarted %> active<% end %>">
-      <%= f.radio_button :id, status.notstarted, 
+      <%= f.radio_button :id, status.notstarted,
                           :name => "status[notstarted]", 
                           :autocomplete => "off", 
                           :checked => status.notstarted,

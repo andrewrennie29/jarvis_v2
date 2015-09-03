@@ -1,9 +1,9 @@
-<div class="page-header">
-  <h1>Get Stuff Done</h1>
-</div>
+<% unless session[:user_id].nil? %>
 
-    <% unless session[:user_id].nil? %>
-      
-      <%= render partial: 'todos/list', locals: { todos: @todos } %>
+	<div class="page-header" id = "projectheader">
+		<%= render partial: 'projects/projectstatus' %>
+	</div>
 
-    <% end %>
+	<div id = "todolist"><%= render partial: 'todos/list', locals: { todos: @todos } %></div>
+
+<% end %>

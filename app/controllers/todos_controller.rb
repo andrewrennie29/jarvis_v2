@@ -1,11 +1,12 @@
 class TodosController < ApplicationController
   before_action :set_todo, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_all_todos, only: [:index]
+  
   # GET /todos
   # GET /todos.json
   def index
     unless session[:user_id].nil?
-      @todos = User.find_by_id(session[:user_id]).todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
+      session[:active_project] = nil
     end
   end
 
@@ -27,40 +28,63 @@ class TodosController < ApplicationController
   # POST /todos.json
   def create
     @todo = Todo.new(todo_params)
+    @todo.save
 
-    respond_to do |format|
-      if @todo.save
-        format.html { redirect_to '/' }
-        format.json { render :show, status: :created, location: @todo }
-      else
-        format.html { render :new }
-        format.json { render json: @todo.errors, status: :unprocessable_entity }
-      end
+    @todos = User.find_by_id(session[:user_id]).todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
+    @projectstatus = Todo.statusobjects(user_id: session[:user_id])
+
+    unless session[:active_project].nil?
+      @project = Project.find_by_slug(session[:active_project])
     end
+    #respond_to do |format|
+    #  if @todo.save
+    #    format.html { redirect_to '/' }
+    #    format.json { render :show, status: :created, location: @todo }
+    #  else
+    #    format.html { render :new }
+    #    format.json { render json: @todo.errors, status: :unprocessable_entity }
+    #  end
+    #end
   end
 
   # PATCH/PUT /todos/1
   # PATCH/PUT /todos/1.json
   def update
-    respond_to do |format|
-      if @todo.update(todo_params)
-        format.html { redirect_to '/', notice: 'Todo was successfully updated.' }
-        format.json { render :show, status: :ok, location: @todo }
-      else
-        format.html { render :edit }
-        format.json { render json: @todo.errors, status: :unprocessable_entity }
-      end
+    @todo.update(todo_params)
+
+    @todos = User.find_by_id(session[:user_id]).todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
+    @projectstatus = Todo.statusobjects(user_id: session[:user_id])
+
+    unless session[:active_project].nil?
+      @project = Project.find_by_slug(session[:active_project])
     end
+
+    #respond_to do |format|
+    #  if @todo.update(todo_params)
+    #    format.html { redirect_to '/', notice: 'Todo was successfully updated.' }
+    #    format.json { render :show, status: :ok, location: @todo }
+    #  else
+    #    format.html { render :edit }
+    #    format.json { render json: @todo.errors, status: :unprocessable_entity }
+    #  end
+    #end
   end
 
   # DELETE /todos/1
   # DELETE /todos/1.json
   def destroy
     @todo.destroy
-    respond_to do |format|
-      format.html { redirect_to '/', notice: 'Todo was successfully destroyed.' }
-      format.json { head :no_content }
+    
+    @todos = User.find_by_id(session[:user_id]).todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
+    @projectstatus = Todo.statusobjects(user_id: session[:user_id])
+
+    unless session[:active_project].nil?
+      @project = Project.find_by_slug(session[:active_project])
     end
+    #respond_to do |format|
+    #  format.html { redirect_to '/', notice: 'Todo was successfully destroyed.' }
+    #  format.json { head :no_content }
+    #end
   end
 
   def navbarcreate
@@ -73,6 +97,12 @@ class TodosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_todo
       @todo = Todo.find(params[:id])
+
+    end
+
+    def set_all_todos
+      @todos = User.find_by_id(session[:user_id]).todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
+      @projectstatus = Todo.statusobjects(user_id: session[:user_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

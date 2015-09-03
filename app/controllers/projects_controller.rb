@@ -10,13 +10,10 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    session[:active_project] = params[:slug]
     @project = Project.find_by_slug(params[:slug])
-    @projecttodos = @project.todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
-    @pointsremaining = @projecttodos.where('statuses.complete = false').sum(:points)
-    @completedtodos = @projecttodos.where('statuses.complete = true').count
-    @inprogresstodos = @projecttodos.where('statuses.complete = false and statuses.notstarted = false').count
-    @overduetodos = @projecttodos.where('statuses.complete = false and todos.duedate < curdate()').count
-    @totaltodos = @projecttodos.count
+    @todos = Project.find_by_slug(params[:slug]).todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
+    @projectstatus = Todo.statusobjects(project_id: params[:slug])
   end
 
   # GET /projects/new

@@ -4,6 +4,6 @@
 
     <% unless session[:user_id].nil? %>
       
-      <%= render partial: 'todos/list', locals: { todos: @projecttodos } %>
+      <div id = "todolist"><%= render partial: 'todos/list', locals: { todos: @todos } %></div>
 
     <% end %>
