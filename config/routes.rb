@@ -18,12 +18,18 @@ Rails.application.routes.draw do
   resources :statuses
 
   resources :todos do
+    
+    post 'navbarnew'
+    put 'navbarnew' 
+    get 'navbarnew'
+
     resources :comments
+
   end
 
   resources :users
 
-  post 'todos/navbarcreate' => 'todos#navbarcreate'
+  post 'todos/navbarnew' => 'todos#navbarnew'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

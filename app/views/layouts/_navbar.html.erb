@@ -42,9 +42,9 @@
         </li>
       </ul>
       <% unless session[:user_id].nil? %>
-        <%= form_for Todo.navnew, remote: true, :html => {:class => "navbar-form navbar-left"} do |f| %>
+        <%= form_for Todo.new, remote: true, :url => { :action => "navbarnew", :controller => "todos" }, :html => {:class => "navbar-form navbar-left"} do |f| %>
         <div class="input-group">
-          <%= f.text_field :name, class: "form-control", placeholder: "Get this done..." %>
+          <%= f.text_field :name, class: "form-control", placeholder: "Get this done...", :id => 'navbar-todo-add' %>
         <span class="input-group-btn">
           <%= f.submit "Add", class: "btn btn-default" %>
         </span>

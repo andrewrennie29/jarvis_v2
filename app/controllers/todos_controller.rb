@@ -6,6 +6,7 @@ class TodosController < ApplicationController
   # GET /todos.json
   def index
     unless session[:user_id].nil?
+      @todo = Todo.new
       session[:active_project] = nil
     end
   end
@@ -87,10 +88,22 @@ class TodosController < ApplicationController
     #end
   end
 
-  def navbarcreate
-    session[:navbartodo] = params['todo']['name']
-    puts session[:navbartodo]
-    redirect_to new_todo_path, remote: true
+  def navbarnew
+    
+    if session[:active_project].nil?
+      session[:active_project] = Project.find_by_name('No Project').slug
+    end
+
+    @todo = Todo.create(:name => params[:todo][:name], :project_id => Project.find_by_slug(session[:active_project]).id, :duedate => Date.today)
+    unless @todo.valid?
+      flash[:error] = @todo.errors.full_messages.join("<br>").html_safe
+    else
+      flash[:success] = "Todo added successfully"
+    end
+
+    session[:active_project] = nil
+
+    redirect_to @todo, remote: true
   end
 
   private

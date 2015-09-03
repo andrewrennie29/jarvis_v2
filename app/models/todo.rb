@@ -6,17 +6,13 @@ class Todo < ActiveRecord::Base
 	has_many :comments
 	after_save :createstatus
 
-    def self.navnew
-        self.new
-    end
-
 	def self.statusobjects(options = {} )
 
 		defaults = { :user_id => nil,
     						:project_id => nil,
     						:option_3 => nil,
     						:option_4 => nil}
-  	options = defaults.merge!(options)
+  	     options = defaults.merge!(options)
 
 		unless options[:project_id].nil?
 			@project = Project.find_by_slug(options[:project_id])

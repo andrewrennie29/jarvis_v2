@@ -7,8 +7,8 @@
         <% if todo.importance == 3 %> <span class="glyphicon glyphicon-exclamation-sign text-danger" title = "High Priority"></span><% end %> <%= link_to todo.name.titleize, todo, remote: true %>
       </div>
       <div class = "col-md-3">
-        <div class = "col-md-6"><%= link_to '<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>'.html_safe, new_todo_comment_path(todo, @comment), remote: true %> <small><%= todo.comments.count %></small></div>
-        <div class = "col-md-6"><%= link_to '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>'.html_safe, todo, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></div>
+        <div class = "col-md-7"><%= link_to '<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>'.html_safe, new_todo_comment_path(todo, @comment), remote: true %> <small><%= todo.comments.count %></small> <% unless todo.comments.joins(:followup).where('followups.complete = false').count == 0 %> <span class="glyphicon glyphicon-flag text-danger" aria-hidden="true"></span><% end %></div>
+        <div class = "col-md-5"><%= link_to '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>'.html_safe, todo, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></div>
       </div>
       </dt>
       <dd>
