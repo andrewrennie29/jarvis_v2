@@ -16,6 +16,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 gem 'rails', '4.1.8'
 # Use mysql as the database for Active Record
 gem 'mysql2'
+# Amending action mailer
+gem 'actionmailer', source 'http://rubygems.org'
 
 #bootstrap
 gem 'bootstrap-sass', '~> 3.3.4'
