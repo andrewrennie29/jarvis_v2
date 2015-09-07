@@ -110,6 +110,11 @@ class TodosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_todo
       @todo = Todo.find(params[:id])
+      @recur = @todo.recur
+
+      if @recur.nil?
+        @recur = Recur.new
+      end
 
     end
 

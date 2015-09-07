@@ -59,10 +59,11 @@
           <%= f.collection_select :category_id, Category.all, :id, :name,
            {prompt: "Select Category"}, {class: "form-control"} %>
         </div></p>
-      </div>
-
+        
       <%= render partial: 'recurs/form' %>
-
+      
+      </div>
+      
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <%= f.submit "Create Todo", :class => "btn btn-primary" %>
