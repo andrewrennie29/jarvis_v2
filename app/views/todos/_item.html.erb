@@ -31,19 +31,20 @@
   </div>
   <div class = "col-md-2" id = "todostatus<%= todo.status.id %>"><%= render partial: 'statuses/updatestatus', locals: { status: todo.status } %></div>
   <div class = "col-md-2">
-  <%= form_for todo do |f| %>
-    <script type="text/javascript">
-      onChange = "this.form.submit();"
-      $(document).ready(function(){
-      $('#tododatetimepicker<%= todo.id %>').datetimepicker({ showTodayButton: true, defaultDate: "<%= Date.today.strftime("%m/%d/%Y") %>", format: "YYYY-MM-DD" });
-      });
-    </script>
-    <div class="input-group input-group-sm" id='tododatetimepicker<%= todo.id %>'>
-      <span class="input-group-addon" id="basic-addon<%= todo.id %>">
+  <%= form_for todo, remote: true, :authenticity_token => true, :html => { :id => 'assigneddate-update-form-' + todo.id.to_s } do |f| %>
+    <div class="input-group date input-group-sm" id='tododatetimepicker<%= todo.id %>'>
+      <span class="input-group-addon" id='addon'>
         <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
       </span>
-      <%= f.text_field :assigneddate, :class => "form-control" %>
+      <%= f.text_field :assigneddate, :class => 'form-control' %>
     </div>
+    <%= f.submit 'Assign To Date', :class => 'btn btn-default btn-sm' %>
+
+    <script type="text/javascript">
+      $(function(){
+        $('#tododatetimepicker<%= todo.id %>').datetimepicker({ showTodayButton: true, defaultDate: "<%= Date.today.strftime("%m/%d/%Y") %>", format: "YYYY-MM-DD" });
+        });
+    </script>
   <% end %>
   </div>
 </div>
