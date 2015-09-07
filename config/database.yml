@@ -49,6 +49,10 @@ test:
 #
 production:
   <<: *default
-  database: jarvis_v2_production
-  username: jarvis_v2
-  password: <%= ENV['JARVIS_V2_DATABASE_PASSWORD'] %>
+  adapter: mysql2
+  encoding: utf8
+  database: <%= ENV['RDS_DB_NAME'] %>
+  username: <%= ENV['RDS_USERNAME'] %>
+  password: <%= ENV['RDS_PASSWORD'] %>
+  host: <%= ENV['RDS_HOSTNAME'] %>
+  port: <%= ENV['RDS_PORT'] %>
