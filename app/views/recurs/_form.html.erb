@@ -25,26 +25,25 @@
     </div>
     <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
-  <div class="field">
-    <%= f.label :frequency %><br>
-    <%= f.text_field :frequency %>
-  </div>
+  <p><div class="input-group input-group-sm">
+          <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
+          <%= f.select :frequency, [1,2,3,4,5], {prompt: "Select Frequency"}, {class: "form-control"} %>
+        </div></p>
   <div class="field">
     <%= f.label :daypattern %><br>
     <%= f.text_field :daypattern %>
   </div>
-  <div class="field">
-    <%= f.label :enddate %><br>
-    <%= f.date_select :enddate %>
-  </div>
-  <div class="field">
-    <%= f.label :latestdate %><br>
-    <%= f.date_select :latestdate %>
-  </div>
-  <div class="field">
-    <%= f.label :nextdate %><br>
-    <%= f.date_select :nextdate %>
-  </div>
+
+  <script type="text/javascript">
+  $(function () {
+  $('#enddatetimepicker').datetimepicker({ showTodayButton: true, defaultDate: "<%= Date.today.strftime("%m/%d/%Y") %>", format: "YYYY-MM-DD" });
+  });
+</script>
+
+        <p><div class="input-group input-group-sm" id='enddatetimepicker'>
+          <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+          <%= f.text_field :enddate, :class => "form-control" %>
+        </div></p>
   <div class="actions">
     <%= f.submit %>
   </div>
