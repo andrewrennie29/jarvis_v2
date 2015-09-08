@@ -7,7 +7,6 @@ class TodosController < ApplicationController
   def index
     @todo = Todo.new
     unless session[:user_id].nil?
-      @recur = Recur.new
       session[:active_project] = nil
     end
   end
@@ -20,6 +19,7 @@ class TodosController < ApplicationController
   # GET /todos/new
   def new
     @todo = Todo.new
+    @recur = Recur.new
   end
 
   # GET /todos/1/edit
