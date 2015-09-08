@@ -7,6 +7,7 @@ class TodosController < ApplicationController
   def index
     @todo = Todo.new
     unless session[:user_id].nil?
+      @recur = Recur.new
       session[:active_project] = nil
     end
   end
