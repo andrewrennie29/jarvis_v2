@@ -5,8 +5,8 @@ class TodosController < ApplicationController
   # GET /todos
   # GET /todos.json
   def index
+    @todo = Todo.new
     unless session[:user_id].nil?
-      @todo = Todo.new
       session[:active_project] = nil
     end
   end
