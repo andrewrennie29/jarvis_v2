@@ -1,6 +1,5 @@
 GEM
   remote: https://rubygems.org/
-  remote: http://rubygems.org/
   specs:
     actionmailer (4.1.8)
       actionpack (= 4.1.8)
@@ -137,7 +136,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionmailer!
   autoprefixer-rails
   aws-sdk (~> 2)
   bcrypt (~> 3.1.7)
