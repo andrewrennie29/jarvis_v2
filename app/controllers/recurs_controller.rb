@@ -69,6 +69,6 @@ class RecursController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recur_params
-      params.require(:recur).permit(:recurs, :{, :false}, :frequency, :daypattern, :enddate, :latestdate, :nextdate, :todo_id)
+      params.require(:recur).permit(:recurs, :frequency, :daypattern, :enddate, :latestdate, :nextdate, :todo_id)
     end
 end
