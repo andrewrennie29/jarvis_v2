@@ -26,18 +26,15 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    respond_to do |format|
       if @user.save
         @user.projects.create(:name => 'No Project', :description => 'This project collects any Todo items that are not assigned to a project.')
         session[:user_id] = @user.id
         redirect_to '/'
       else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
         flash[:alert] = "#fail! Please try again."
         redirect_to :back
       end
-    end
+
   end
 
   # PATCH/PUT /users/1

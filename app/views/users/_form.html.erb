@@ -18,20 +18,20 @@
           </div>
         <% end %>
 
-        <div class="input-group">
-          <span class="input-group-addon" id="basic-addon1">Name</span>
+        <p><div class="input-group">
+          <span class="input-group-addon" id="username-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
           <%= f.text_field :username, :class => "form-control", :placeholder => "Select username" %>
-        </div>
+        </div></p>
 
-        <div class="input-group">
-          <span class="input-group-addon" id="basic-addon1">Name</span>
+        <p><div class="input-group">
+          <span class="input-group-addon" id="email-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></span>
           <%= f.text_field :email, :class => "form-control", :placeholder => "Enter your email address" %>
-        </div>
+        </div></p>
 
-        <div class="input-group">
-          <span class="input-group-addon" id="basic-addon1">Name</span>
+        <p><div class="input-group">
+          <span class="input-group-addon" id="password-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>
           <%= f.password_field :password, :class => "form-control", :placeholder => "Enter your password" %>
-        </div>
+        </div></p>
 
 
       </div>
