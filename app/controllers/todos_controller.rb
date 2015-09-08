@@ -119,8 +119,10 @@ class TodosController < ApplicationController
     end
 
     def set_all_todos
-      @todos = User.find_by_id(session[:user_id]).todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
-      @projectstatus = Todo.statusobjects(user_id: session[:user_id])
+      unless session[:user_id].nil?
+        @todos = User.find_by_id(session[:user_id]).todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
+        @projectstatus = Todo.statusobjects(user_id: session[:user_id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
