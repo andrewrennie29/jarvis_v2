@@ -16,18 +16,21 @@
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          <div class="field">
-    <%= f.label :recurs %>
-    <%= f.check_box :recurs %>
-  </div>
+        Set Recurrence Options  
         </a>
       </h4>
     </div>
     <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
+        <div class = 'col-md-3'><p><div class="input-group">
+        <span class="input-group-addon">
+          Recurs
+        </span>
+        <span class="input-group-addon" id="basic-addon2"><%= f.check_box :recurs, :class => 'Form-control' %></span>
+      </div></p></div>
   <p><div class="input-group input-group-sm">
           <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
-          <%= f.select :frequency, [1,2,3,4,5], {prompt: "Select Frequency"}, {class: "form-control"} %>
+          <%= f.select :frequency, ['Daily','Weekly','Monthly'], {prompt: "Select Frequency"}, {class: "form-control"} %>
         </div></p>
   <div class="field">
     <%= f.label :daypattern %><br>
