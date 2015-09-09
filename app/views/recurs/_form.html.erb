@@ -28,15 +28,15 @@
               <span class="input-group-addon" id="basic-addon2"><%= f.check_box :recurs, :class => 'Form-control' %></span>
             </div>
           </div>
-          <div class = 'col-md-5'>
+          <div class = 'col-md-4'>
             <div class="input-group input-group-sm">
               <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
               <%= f.select :frequency, ['Daily','Weekly','Monthly'], {prompt: "Select Frequency"}, {class: "form-control"} %>
             </div>
           </div>
-          <div class = 'col-md-4'>
+          <div class = 'col-md-5'>
               <div class="input-group input-group-sm" id='enddatetimepicker'>
-                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                <span class="input-group-addon" id="basic-addon1">End Date <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
                 <%= f.text_field :enddate, :class => "form-control" %>
               </div>
           </div>
@@ -46,13 +46,13 @@
             <div class="btn-group btn-group-sm" data-toggle="buttons">
               <% if @recur.daypattern.nil? %>
                 <% (0..6).each do |d| %>
-                  <label class="btn btn-primary active">
+                  <label class="btn btn-default">
                     <input type="checkbox" autocomplete="off"> <%= Date::DAYNAMES[d].slice(0,3) %>
                   </label>
                 <% end %>
               <% else %>
                 <% @recur.daypattern.to_s.split(//).each do |d| %>
-                  <label class="btn btn-primary active">
+                  <label class="btn btn-default">
                     <input type="checkbox" autocomplete="off" checked> <%= Date::DAYNAMES[d].slice(0,3) %>
                   </label>
                 <% end %>
