@@ -47,7 +47,8 @@
               <% if @recur.daypattern.nil? %>
                 <% (0..6).each do |d| %>
                   <label class="btn btn-default">
-                    <input type="checkbox" autocomplete="off"> <%= Date::DAYNAMES[d].slice(0,3) %>
+                    <input type="checkbox" id="recur_daypattern_<%= d %>" name = "recur[daypattern][<%= d %>]">
+                      <%= Date::DAYNAMES[d].slice(0,3) %>
                   </label>
                 <% end %>
               <% else %>
