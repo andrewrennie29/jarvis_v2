@@ -75,7 +75,8 @@ class TodosController < ApplicationController
       @recur.update(:recurs => params["recur"]["recurs"].to_i,
                     :daypattern => daypattern,
                     :frequency => params["recur"]["frequency"],
-                    :enddate => params["recur"]["enddate"])
+                    :enddate => params["recur"]["enddate"],
+                    :todo_id => @todo.id)
     end
 
     @todos = User.find_by_id(session[:user_id]).todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')

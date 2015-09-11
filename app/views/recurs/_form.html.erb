@@ -56,7 +56,7 @@
               <% else %>
                 <% @recur.daypattern.to_s.split(//).each do |d| %>
                   <label class="btn btn-default<% if d.to_i == 1 %> active<% end %>">
-                    <input type="checkbox" id="recur_daypattern_<%= n %>" name = "recur[daypattern][<%= n %>]" value = "<% if d.to_i == 1 %>on<% else %>off<% end %>" <% if d.to_i == 1 %>checked<% end %> >
+                    <input type="checkbox" id="recur_daypattern_<%= n %>" name = "recur[daypattern][<%= n %>]" <% if d.to_i == 1 %>checked = "true"<% end %> >
                       <%= Date::DAYNAMES[n].slice(0,3) %>
                   </label>
                   <% n = n + 1 %>
