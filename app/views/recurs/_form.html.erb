@@ -44,22 +44,26 @@
         <div class='row'>
           <div class = 'col-md-8'>
             <div class="btn-group btn-group-sm" data-toggle="buttons">
+              <% n = 0 %>
               <% if @recur.daypattern.nil? %>
                 <% (0..6).each do |d| %>
                   <label class="btn btn-default">
-                    <input type="checkbox" id="recur_daypattern_<%= d %>" name = "recur[daypattern][<%= d %>]">
-                      <%= Date::DAYNAMES[d].slice(0,3) %>
+                    <input type="checkbox" id="recur_daypattern_<%= n %>" name = "recur[daypattern][<%= d %>]">
+                      <%= Date::DAYNAMES[n].slice(0,3) %>
                   </label>
+                  <% n = n + 1 %>
                 <% end %>
               <% else %>
                 <% @recur.daypattern.to_s.split(//).each do |d| %>
-                  <label class="btn btn-default">
-                    <input type="checkbox" autocomplete="off" checked> <%= Date::DAYNAMES[d].slice(0,3) %>
+                  <label class="btn btn-default<% if d.to_i == 1 %> active<% end %>">
+                    <input type="checkbox" id="recur_daypattern_<%= n %>" name = "recur[daypattern][<%= n %>]" value = "<% if d.to_i == 1 %>on<% else %>off<% end %>" <% if d.to_i == 1 %>checked<% end %> >
+                      <%= Date::DAYNAMES[n].slice(0,3) %>
                   </label>
+                  <% n = n + 1 %>
                 <% end %>
               <% end %>
             </div>
-          </div>
+          </div> 
         </div>
       </div>
     </div>

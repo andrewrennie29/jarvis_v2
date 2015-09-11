@@ -33,22 +33,7 @@ class TodosController < ApplicationController
     @todo.save
 
     if params["recur"]["recurs"] == "1"
-      daypattern = nil
-      params["recur"]["daypattern"].each do |d|
-        if d == "on"
-          if daypattern.nil?
-            daypattern = 1.to_s
-          else
-            daypattern = daypattern + 1.to_s
-          end
-        else
-          if daypattern.nil?
-            daypattern = 0.to_s
-          else
-            daypattern = daypattern + 0.to_s
-          end
-        end
-      end
+      daypattern = Recur.createdaypattern(params["recur"]["daypattern"])
       @recur = Recur.new
       @recur.update(:recurs => params["recur"]["recurs"].to_i,
                     :daypattern => daypattern,
@@ -78,6 +63,20 @@ class TodosController < ApplicationController
   # PATCH/PUT /todos/1.json
   def update
     @todo.update(todo_params)
+
+    if params["recur"]["recurs"] == "1"
+      if @todo.recur.nil?
+        @recur = Recur.new
+      else
+        @recur = @todo.recur
+      end
+      daypattern = Recur.createdaypattern(params["recur"]["daypattern"])
+      
+      @recur.update(:recurs => params["recur"]["recurs"].to_i,
+                    :daypattern => daypattern,
+                    :frequency => params["recur"]["frequency"],
+                    :enddate => params["recur"]["enddate"])
+    end
 
     @todos = User.find_by_id(session[:user_id]).todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
     @projectstatus = Todo.statusobjects(user_id: session[:user_id])
