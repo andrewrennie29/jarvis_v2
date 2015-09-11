@@ -64,19 +64,28 @@ class TodosController < ApplicationController
   def update
     @todo.update(todo_params)
 
-    if params["recur"]["recurs"] == "1"
-      if @todo.recur.nil?
-        @recur = Recur.new
-      else
-        @recur = @todo.recur
+    unless params["recur"].nil?
+
+      if params["recur"]["recurs"] == "1"
+        if @todo.recur.nil?
+          @recur = Recur.new
+        else
+          @recur = @todo.recur
+        end
+        daypattern = Recur.createdaypattern(params["recur"]["daypattern"])
+        
+        @recur.update(:recurs => params["recur"]["recurs"].to_i,
+                      :daypattern => daypattern,
+                      :frequency => params["recur"]["frequency"],
+                      :enddate => params["recur"]["enddate"],
+                      :todo_id => @todo.id)
       end
-      daypattern = Recur.createdaypattern(params["recur"]["daypattern"])
-      
-      @recur.update(:recurs => params["recur"]["recurs"].to_i,
-                    :daypattern => daypattern,
-                    :frequency => params["recur"]["frequency"],
-                    :enddate => params["recur"]["enddate"],
-                    :todo_id => @todo.id)
+
+    end
+
+    unless params["todo"]["assigneddate"].nil?
+      flash[:success] = "Todo assigned to " + params["todo"]["assigneddate"]
+      puts flash[:success]
     end
 
     @todos = User.find_by_id(session[:user_id]).todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
