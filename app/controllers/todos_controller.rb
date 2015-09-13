@@ -39,6 +39,8 @@ class TodosController < ApplicationController
                     :daypattern => daypattern,
                     :frequency => params["recur"]["frequency"],
                     :enddate => params["recur"]["enddate"],
+                    :latestdate => @todo.duedate,
+                    :nextdate => Recur.nextdate,
                     :todo_id => @todo.id)
     end
 
@@ -78,6 +80,7 @@ class TodosController < ApplicationController
                       :daypattern => daypattern,
                       :frequency => params["recur"]["frequency"],
                       :enddate => params["recur"]["enddate"],
+                      :latestdate => @todo.duedate,
                       :todo_id => @todo.id)
       end
 

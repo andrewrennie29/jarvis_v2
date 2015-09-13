@@ -44,6 +44,14 @@ class StatusesController < ApplicationController
   def update
 
     @status.update_status(status_params)
+    unless @status.todo.recur.nil?
+      @recur = @status.todo.recur
+
+      if @recur.recurs == true && params["status"]["complete"] == "false"
+        @recur.createnext(@status.todo_id)
+      end
+    end
+
     unless session[:active_project].nil?
       @project = Project.find_by_slug(session[:active_project])
     end
