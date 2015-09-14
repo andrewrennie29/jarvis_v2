@@ -24,14 +24,14 @@ class Todo < ActiveRecord::Base
     end 
 
     statusobjects = {:pointsremaining => @todos.where('statuses.complete = false').sum(:points),
-    									:completedtodos => @todos.where('statuses.complete = true').count,
-    									:completedpoints => @todos.where('statuses.complete = true').sum(:points),
-    									:inprogresstodos => @todos.where('statuses.complete = false and statuses.notstarted = false').count,
-    									:inprogresspoints => @todos.where('statuses.complete = false and statuses.notstarted = false').sum(:points),
-    									:overduetodos => @todos.where('statuses.complete = false and todos.duedate < curdate()').count,
-    									:overduepoints => @todos.where('statuses.complete = false and todos.duedate < curdate()').sum(:points),
-    									:totaltodos => @todos.count,
-    									:totalpoints => @todos.sum(:points)}
+    								:completedtodos => @todos.where('statuses.complete = true').count,
+    								:completedpoints => @todos.where('statuses.complete = true').sum(:points),
+  									:inprogresstodos => @todos.where('statuses.complete = false and statuses.notstarted = false').count,
+  									:inprogresspoints => @todos.where('statuses.complete = false and statuses.notstarted = false').sum(:points),
+  									:overduetodos => @todos.where('statuses.complete = false and todos.duedate < curdate()').count,
+  									:overduepoints => @todos.where('statuses.complete = false and todos.duedate < curdate()').sum(:points),
+  									:totaltodos => @todos.count,
+  									:totalpoints => @todos.sum(:points)}
 	
     return statusobjects
 

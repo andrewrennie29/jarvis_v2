@@ -34,8 +34,9 @@ class Recur < ActiveRecord::Base
   	if comparison_date >= self.nextdate
 
   		@nexttodo = self.todo.dup
+			@nexttodo.duedate = self.nextdate
+  		@nexttodo.assigneddate = nil
   		@nexttodo.save
-  		@nexttodo.update(:duedate => self.nextdate, :assigneddate => nil)
   		self.update(:todo_id => @nexttodo.id, 
   								:latestdate => self.nextdate)
   		self.update(:nextdate => self.calculate_next_date)						
