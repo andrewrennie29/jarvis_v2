@@ -5,7 +5,7 @@ class TodosController < ApplicationController
   # GET /todos
   # GET /todos.json
   def index
-    @Todo.all.each do |t|
+    Todo.all.each do |t|
       if t.slug.nil?
         @project = t.project
         if t.project.next_id.nil?
