@@ -40,7 +40,7 @@ class TodosController < ApplicationController
                     :frequency => params["recur"]["frequency"],
                     :enddate => params["recur"]["enddate"],
                     :latestdate => @todo.duedate,
-                    :nextdate => Recur.nextdate,
+                    :nextdate => Recur.calculate_next_date,
                     :todo_id => @todo.id)
     end
 
@@ -82,6 +82,7 @@ class TodosController < ApplicationController
                       :enddate => params["recur"]["enddate"],
                       :latestdate => @todo.duedate,
                       :todo_id => @todo.id)
+        @recur.update(:nextdate => @recur.calculate_next_date)
       end
 
     end

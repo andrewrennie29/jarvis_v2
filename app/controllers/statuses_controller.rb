@@ -48,7 +48,7 @@ class StatusesController < ApplicationController
       @recur = @status.todo.recur
 
       if @recur.recurs == true && params["status"]["complete"] == "false"
-        @recur.createnext(@status.todo_id)
+        @recur.create_next_todo
       end
     end
 
