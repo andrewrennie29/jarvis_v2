@@ -15,6 +15,8 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     @comment = Comment.new
+    @activetodo = Todo.find_by_slug(params[:todo_slug])
+    @comments = @activetodo.comments.all.order(created_at: :desc)
   end
 
   # GET /comments/1/edit
@@ -25,7 +27,9 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.create(comment_params)
-
+    @activetodo = Todo.find_by_slug(params[:todo_slug])
+    @comments = @activetodo.comments.all.order(created_at: :desc)
+    
     if params[:followup] == '1'
       Followup.create(:comment_id => @comment.id, :complete => false)
     end

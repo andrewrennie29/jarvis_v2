@@ -1,10 +1,10 @@
-<%= form_for ([@todo, @comment]), :url => todo_comments_path(params[:todo_id]), :remote => true, :html => { :class => "form-horizontal" } do |f| %>
+<%= form_for ([@todo, @comment]), :url => todo_comments_path(params[:todo_slug]), :remote => true, :html => { :class => "form-horizontal" } do |f| %>
   <!-- Modal -->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"><%= Todo.find_by_id(params[:todo_id]).name.titleize %></h4>
-        <%= Todo.find_by_id(params[:todo_id]).details %>
+        <h4 class="modal-title" id="myModalLabel"><%= @activetodo.name.titleize %></h4>
+        <%= @activetodo.details %>
       </div>
       <div class="modal-body">
         <% if @comment.errors.any? %>
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <%= f.hidden_field :todo_id, :value => params[:todo_id] %>
+        <%= f.hidden_field :todo_id, :value => @activetodo.id %>
         <div class = "row">
           <div class = "col-md-9">
             <%= f.text_area :details, :class => "form-control", :placeholder => "Enter comment" %>

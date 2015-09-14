@@ -1,7 +1,7 @@
-<% if Comment.where(:todo_id => params[:todo_id]).count == 0 %>
+<% if @comments.nil? %>
 	No comments, use the text box below to add a comment for this task.</br>
 <% else %>
-	<% Comment.where(:todo_id => params[:todo_id]).order(created_at: :desc).each do |comment| %>
+	<% @comments.each do |comment| %>
 		<div class = "row">
 			<div class = "col-md-2" id="followup<%= comment.id %>"><%= render partial: 'followups/status', locals: { followup: comment.followup } %></div>
 			<div class = "col-md-6"><%= comment.details %></div>
