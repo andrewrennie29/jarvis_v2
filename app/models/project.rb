@@ -12,6 +12,10 @@ class Project < ActiveRecord::Base
 		
 	end	
 
+	def increment_next_id
+		self.update(:next_id => self.next_id + 1)
+	end
+
 private
 	def create_slug
 		self.slug = [user_id, name.parameterize].join("-")

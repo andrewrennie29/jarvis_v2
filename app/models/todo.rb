@@ -5,6 +5,8 @@ class Todo < ActiveRecord::Base
 	has_one :recur, dependent: :destroy
 	has_many :comments, dependent: :destroy
 	after_save :createstatus
+  validates :slug, presence: true, uniqueness: { case_sensitive: false }
+  before_validation :create_slug
 
 	def self.statusobjects(options = {} )
 
@@ -37,10 +39,25 @@ class Todo < ActiveRecord::Base
 
 	end
 
+  def to_param
+    slug
+  end
+
+  def update_slug
+    
+  end 
+
 	private
 	def createstatus
 		if self.status.nil?
 			Status.create(:todo_id => id)
 		end
 	end
+
+  def create_slug
+    if self.slug.nil? || self.slug.index(self.project.name.parameterize).nil?
+      @project = self.project
+      self.slug = [@project.name.parameterize, @project.next_id].join("-")
+    end
+  end
 end

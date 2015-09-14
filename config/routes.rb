@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :statuses
 
-  resources :todos do
+  resources :todos, param: :slug do
     
     post 'navbarnew'
     put 'navbarnew' 

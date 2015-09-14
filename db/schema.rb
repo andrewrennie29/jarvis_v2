@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150908201623) do
+ActiveRecord::Schema.define(version: 20150914190531) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20150908201623) do
     t.datetime "updated_at"
     t.boolean  "isactive",    default: true
     t.string   "slug"
+    t.integer  "next_id",     default: 1
   end
 
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
@@ -87,6 +88,7 @@ ActiveRecord::Schema.define(version: 20150908201623) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
 
   add_index "todos", ["category_id"], name: "index_todos_on_category_id", using: :btree

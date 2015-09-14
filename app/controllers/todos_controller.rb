@@ -140,6 +140,8 @@ class TodosController < ApplicationController
       flash[:success] = "Todo added successfully"
     end
 
+    @todo.project.increment_next_id
+
     session[:active_project] = nil
 
     redirect_to @todo, remote: true
@@ -148,7 +150,7 @@ class TodosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_todo
-      @todo = Todo.find(params[:id])
+      @todo = User.find_by_id(session[:user_id]).todos.find_by_slug(params[:slug])
       @recur = @todo.recur
 
       if @recur.nil?
