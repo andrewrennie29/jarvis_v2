@@ -5,18 +5,13 @@ class TodosController < ApplicationController
   # GET /todos
   # GET /todos.json
   def index
-    Todo.all.each do |t|
-      if t.slug.nil?
-        @project = t.project
-        if t.project.next_id.nil?
-          t.project.next_id = 1
-        else
-          t.project.next_id += 1
-        end
-        t.project.save
-        t.update(:slug => [@project.name.parameterize, @project.next_id].join("-"))
+    Project.all.each do |p|
+      unless p.todos.last.nil?
+        p.update(:next_id => p.todos.last.slug.gsub(/\D/, '').to_i + 1)
       end
     end
+
+
     @todo = Todo.new
     unless session[:user_id].nil?
       session[:active_project] = nil
