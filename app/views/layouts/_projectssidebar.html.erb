@@ -1,0 +1,10 @@
+<div class = "row">
+	<ul class="nav nav-pills">
+	  <% unless session[:user_id].nil? %>
+	  	<li role="presentation" <% if session[:active_project] == session[:user_id].to_s + '-no-project' %>  class ="active" <% else %> class ="tab-pane fade in"<% end %> ><a href="/projects/<%= session[:user_id] %>-no-project" data-toggle="tooltip" data-placement="bottom" title="Some tooltip text!">No Project</a></li>
+	  	<% User.find_by_id(session[:user_id]).projects.where(:isactive => true).where.not(:name => 'No Project').order(:name).all.each do |project| %>
+				<li role="presentation" <% if project.slug == session[:active_project]%> class ="tab-pane fade in active" <% else %> class ="tab-pane fade in"<% end %> ><%= link_to project.name.titleize, project %></a></li>
+			<% end %>
+		<% end %>
+	</ul>
+</div>
