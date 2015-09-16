@@ -48,7 +48,9 @@ class TodosController < ApplicationController
     @projectstatus = Todo.statusobjects(user_id: session[:user_id])
 
     unless session[:active_project].nil?
-      @project = Project.find_by_slug(session[:active_project])
+      @project = User.find_by_id(session[:user_id]).projects.find_by_slug(session[:active_project])
+      @todos = @project.todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
+      @projectstatus = Todo.statusobjects(project_id: session[:active_project])
     end
     #respond_to do |format|
     #  if @todo.save
@@ -96,7 +98,9 @@ class TodosController < ApplicationController
     @projectstatus = Todo.statusobjects(user_id: session[:user_id])
 
     unless session[:active_project].nil?
-      @project = Project.find_by_slug(session[:active_project])
+      @project = User.find_by_id(session[:user_id]).projects.find_by_slug(session[:active_project])
+      @todos = @project.todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
+      @projectstatus = Todo.statusobjects(project_id: session[:active_project])
     end
 
     #respond_to do |format|
@@ -119,7 +123,9 @@ class TodosController < ApplicationController
     @projectstatus = Todo.statusobjects(user_id: session[:user_id])
 
     unless session[:active_project].nil?
-      @project = Project.find_by_slug(session[:active_project])
+      @project = User.find_by_id(session[:user_id]).projects.find_by_slug(session[:active_project])
+      @todos = @project.todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
+      @projectstatus = Todo.statusobjects(project_id: session[:active_project])
     end
     #respond_to do |format|
     #  format.html { redirect_to '/', notice: 'Todo was successfully destroyed.' }
@@ -130,7 +136,7 @@ class TodosController < ApplicationController
   def navbarnew
     
     if session[:active_project].nil?
-      session[:active_project] = Project.find_by_name('No Project').slug
+      session[:active_project] = User.find_by_id(session[:user_id]).projects.find_by_name('No Project').slug
     end
 
     @todo = Todo.create(:name => params[:todo][:name], :project_id => Project.find_by_slug(session[:active_project]).id, :duedate => Date.today)
@@ -142,7 +148,9 @@ class TodosController < ApplicationController
 
     @todo.project.increment_next_id
 
-    session[:active_project] = nil
+    if session[:active_project] == User.find_by_id(session[:user_id]).projects.find_by_name('No Project').slug
+      session[:active_project] = nil
+    end
 
     redirect_to @todo, remote: true
   end
@@ -160,9 +168,16 @@ class TodosController < ApplicationController
     end
 
     def set_all_todos
+      session[:active_project] = nil
       unless session[:user_id].nil?
-        @todos = User.find_by_id(session[:user_id]).todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
-        @projectstatus = Todo.statusobjects(user_id: session[:user_id])
+        if session[:active_project].nil?
+          @todos = User.find_by_id(session[:user_id]).todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
+          @projectstatus = Todo.statusobjects(user_id: session[:user_id])
+        else
+          @project = User.find_by_id(session[:user_id]).projects.find_by_slug(session[:active_project])
+          @todos = @project.todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
+          @projectstatus = Todo.statusobjects(project_id: session[:active_project])
+        end
       end
     end
 
