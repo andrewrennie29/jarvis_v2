@@ -36,6 +36,7 @@ class Recur < ActiveRecord::Base
   		@nexttodo = self.todo.dup
 			@nexttodo.duedate = self.nextdate
   		@nexttodo.assigneddate = nil
+      @nexttodo.slug = nil
   		@nexttodo.save
   		self.update(:todo_id => @nexttodo.id, 
   								:latestdate => self.nextdate)
