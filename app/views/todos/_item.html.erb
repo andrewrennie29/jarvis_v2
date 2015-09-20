@@ -21,7 +21,7 @@
           <% end %>
         <% end %>
         <span class="label label-default"><%= todo.points.to_s + ' point'.pluralize(todo.points) %></span>
-        <%= link_to todo.project do %><span class="label label-default"><%= todo.slug %></span><% end %>
+        <%= link_to todo.project, remote: true do %><span class="label label-default"><%= todo.slug %></span><% end %>
       </div>
       </dd>
       <dd>
