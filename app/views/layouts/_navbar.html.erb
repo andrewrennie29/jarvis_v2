@@ -35,7 +35,7 @@
             	<li><a href="#">You don't have any projects</a></li>
             <% else %>
             	<% Project.where(:user_id => session[:user_id], :isactive => true).order(name: :asc).each do |project| %>
-            	<li><%= link_to project.name, project %></li>
+            	<li><%= link_to project.name, project, remote: true %></li>
             	<% end %>
             <% end %>
           </ul>
