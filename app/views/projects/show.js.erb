@@ -1,0 +1,2 @@
+$("#projectheader").html("<%= escape_javascript(render partial: 'projects/projectstatus', locals: { todos: @todos }) %>");
+$("#todolist").html("<%= escape_javascript(render partial: 'todos/list', locals: { todos: @todos }) %>");

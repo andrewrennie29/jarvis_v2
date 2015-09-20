@@ -22,7 +22,8 @@ class Todo < ActiveRecord::Base
     end
 
     if options[:project_id].nil?
-    	@todos = User.find_by_id(options[:user_id]).todos.joins(:status).all
+    	@todos = User.find_by_id(options[:user_id]).todos.joins(:status).where('((`todos`.`duedate` < curdate() and `statuses`.`complete` = false)
+  or (`todos`.`duedate` between subdate(curdate(), interval dayofweek(curdate()) - 1 day) and adddate(subdate(curdate(), interval dayofweek(curdate()) - 1 day), interval 13 day))) or (`todos`.`assigneddate` between subdate(curdate(), interval dayofweek(curdate()) - 1 day) and adddate(subdate(curdate(), interval dayofweek(curdate()) - 1 day), interval 13 day))')
     end 
 
     statusobjects = {:pointsremaining => @todos.where('statuses.complete = false').sum(:points),
