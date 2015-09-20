@@ -1,9 +1,13 @@
-	<h3>Projects</h3>
-	<h5><i><small><a href = '/projects'>Manage Projects</a></small></i></h5>
-	<hr>
-	<ul class="nav nav-pills nav-stacked" role="tablist">
-	  <% unless session[:user_id].nil? %>
+	<div class="btn-group">
+  <a href="/projects" type="button" class="btn btn-default">Projects</a>
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu">
+    <% unless session[:user_id].nil? %>
 	  	<li role="presentation" <% if session[:active_project] == session[:user_id].to_s + '-no-project' %>  class ="active" <% else %> class ="tab-pane fade in"<% end %> data-toggle="tooltip" data-placement="bottom" title="Todos: "><a href="/projects/<%= session[:user_id] %>-no-project" data-remote = "true">No Project</a></li>
+	  	<li role="separator" class="divider"></li>
 	  	<% User.find_by_id(session[:user_id]).projects.where(:isactive => true).where.not(:name => 'No Project').order(:name).all.each do |project| %>
 				<li role="presentation" data-toggle="tooltip" data-placement="bottom" title="Todos: <%= project.todos.count %>" <% if project.slug == session[:active_project]%> class ="tab-pane fade in active" <% else %> class ="tab-pane fade in"<% end %> >
 				<%= link_to project, remote: true do %>
@@ -12,5 +16,6 @@
 				</li>
 			<% end %>
 		<% end %>
-	</ul>
+  </ul>
+</div>
 <hr>
