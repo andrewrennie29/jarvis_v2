@@ -2,6 +2,7 @@
 
 <% todos.each do |todo| %>
 
-      <%= render partial: 'todos/item', locals: { todo: todo }  %>
+      <div class = "row" id='<%= todo.id %>' ><%= render partial: 'todos/item', locals: { todo: todo }  %> </div>
+      <br>	
 
 <% end %>

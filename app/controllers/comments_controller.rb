@@ -34,6 +34,8 @@ class CommentsController < ApplicationController
       Followup.create(:comment_id => @comment.id, :complete => false)
     end
 
+    @comment = Comment.new
+
     #respond_to do |format|
     #  if @comment.save
     #    format.html { redirect_to @comment, notice: 'Comment was successfully created.' }

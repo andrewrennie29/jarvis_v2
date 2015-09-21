@@ -1,2 +1,3 @@
 $("#comments-go-here").html("<%= escape_javascript(render 'comments/allcomments') %>");
 $('#comment_details').val('');
+$("#<%= params["comment"]["todo_id"] %>").html("<%= escape_javascript(render partial: 'todos/item', locals: { todo: @activetodo } ) %>");

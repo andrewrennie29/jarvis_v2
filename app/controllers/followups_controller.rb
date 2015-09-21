@@ -63,6 +63,7 @@ class FollowupsController < ApplicationController
 
   def complete
     @followup = Followup.update(params[:followup_id], :complete => true)
+    @activetodo = @followup.comment.todo
   end
 
   private
