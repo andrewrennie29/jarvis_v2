@@ -1,4 +1,5 @@
 $('#todolist').html("<%= escape_javascript(render partial: 'todos/list', locals: { todos: @todos }) %>");
 $("#new-todo-modal").modal("hide");
+$('#flashgoeshere').html("<%= escape_javascript(render partial: 'layouts/flash') %>");
 $('#completeitems').html("<%= escape_javascript(render partial: 'todos/completeitems', locals: { statusobject: @projectstatus } ) %>");
 $('#progressbars').html("<%= escape_javascript(render partial: 'todos/statusbar', locals: { statusobject: @projectstatus } ) %>");

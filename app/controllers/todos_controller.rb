@@ -89,12 +89,12 @@ class TodosController < ApplicationController
 
     end
 
-    unless params["todo"]["assigneddate"].nil?
-      flash[:success] = "Todo assigned to " + params["todo"]["assigneddate"]
-      puts flash[:success]
+    if params["commit"] == 'Assign To Date'
+      flash[:success] = @todo.name.to_s + " assigned to " + params["todo"]["assigneddate"]
     end
 
-    @todos = User.find_by_id(session[:user_id]).todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
+    @todos = @todos = User.find_by_id(session[:user_id]).todos.joins(:status).where('((`todos`.`duedate` < curdate() and `statuses`.`complete` = false)
+  or (`todos`.`duedate` between subdate(curdate(), interval dayofweek(curdate()) - 1 day) and adddate(subdate(curdate(), interval dayofweek(curdate()) - 1 day), interval 13 day))) or (`todos`.`assigneddate` between subdate(curdate(), interval dayofweek(curdate()) - 1 day) and adddate(subdate(curdate(), interval dayofweek(curdate()) - 1 day), interval 13 day))').order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
     @projectstatus = Todo.statusobjects(user_id: session[:user_id])
 
     unless session[:active_project].nil?
@@ -119,7 +119,8 @@ class TodosController < ApplicationController
   def destroy
     @todo.destroy
     
-    @todos = User.find_by_id(session[:user_id]).todos.joins(:status).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
+    @todos = @todos = User.find_by_id(session[:user_id]).todos.joins(:status).where('((`todos`.`duedate` < curdate() and `statuses`.`complete` = false)
+  or (`todos`.`duedate` between subdate(curdate(), interval dayofweek(curdate()) - 1 day) and adddate(subdate(curdate(), interval dayofweek(curdate()) - 1 day), interval 13 day))) or (`todos`.`assigneddate` between subdate(curdate(), interval dayofweek(curdate()) - 1 day) and adddate(subdate(curdate(), interval dayofweek(curdate()) - 1 day), interval 13 day))').order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
     @projectstatus = Todo.statusobjects(user_id: session[:user_id])
 
     unless session[:active_project].nil?
