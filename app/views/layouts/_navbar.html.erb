@@ -25,21 +25,6 @@
             <li><a href="/categories/other">Other</a></li>
           </ul>
         </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><%= link_to 'Create Project', new_project_path, remote: true %></li>
-            <li><a href="/projects">View All</a></li>
-            <li role="separator" class="divider"></li>
-            <% if Project.where(:user_id => session[:user_id], :isactive => true).count == 0 %>
-            	<li><a href="#">You don't have any projects</a></li>
-            <% else %>
-            	<% Project.where(:user_id => session[:user_id], :isactive => true).order(name: :asc).each do |project| %>
-            	<li><%= link_to project.name, project, remote: true %></li>
-            	<% end %>
-            <% end %>
-          </ul>
-        </li>
       </ul>
       <% unless session[:user_id].nil? %>
         <%= form_for Todo.new, remote: true, :url => { :action => "navbarnew", :controller => "todos" }, :html => {:class => "navbar-form navbar-left"} do |f| %>
