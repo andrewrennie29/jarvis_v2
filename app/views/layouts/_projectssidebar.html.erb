@@ -11,14 +11,14 @@
 	  	<li role="presentation" <% if session[:active_project] == session[:user_id].to_s + '-no-project' %>  class ="active" <% else %> class ="tab-pane fade in"<% end %> data-toggle="tooltip" data-placement="bottom" title="Todos: "><a href="/projects/<%= session[:user_id] %>-no-project" data-remote = "true">No Project</a></li>
 	  	<li role="separator" class="divider"></li>
 	  	<% User.find_by_id(session[:user_id]).projects.where(:isactive => true).where.not(:name => 'No Project').order(:name).all.each do |project| %>
-				<li role="presentation" data-toggle="tooltip" data-placement="bottom" title="Todos: <%= project.todos.count %>" <% if project.slug == session[:active_project]%> class ="tab-pane fade in active" <% else %> class ="tab-pane fade in"<% end %> >
+				<li role="presentation" <% if project.slug == session[:active_project]%> class ="tab-pane fade in active" <% else %> class ="tab-pane fade in"<% end %> >
 				<%= link_to project, remote: true do %>
-					<span class="badge"><%= project.todos.joins(:status).where("curdate() >= todos.duedate and statuses.complete = false").count %></span>
-					<%= project.name.titleize %> 
-					<% if project.todos.joins(:status).where("curdate() > todos.duedate and statuses.complete = false").count > 0 %>
-					<span class="glyphicon glyphicon-flag text-danger" aria-hidden="true"></span>
-					<% end %>
 					
+					<div class="content show-tooltip" data-toggle="tooltip" data-placement="bottom" data-html="true" title="Todos: <%= project.todos.count %>  --  Due Today: <%= project.todos.where('duedate = curdate()').count %>  --  Overdue: <%= project.todos.joins(:status).where('todos.duedate < curdate() and statuses.complete = false').count %>"><span class="badge"><%= project.todos.joins(:status).where("curdate() >= todos.duedate and statuses.complete = false").count %></span> <%= project.name.titleize %> 
+						<% if project.todos.joins(:status).where("curdate() > todos.duedate and statuses.complete = false").count > 0 %>
+						<span class="glyphicon glyphicon-flag text-danger" aria-hidden="true"></span>
+						<% end %>
+					</div>
 				<% end %>
 
 				</li>
