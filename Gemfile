@@ -13,9 +13,9 @@ gem 'aws-sdk', '~> 2'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.8'
+gem 'rails', '4.2.1'
 # Use mysql as the database for Active Record
-gem 'mysql2'
+gem 'mysql2', '~> 0.3.18'
 # Amending action mailer
 #gem 'actionmailer', source: "http://rubygems.org"
 
