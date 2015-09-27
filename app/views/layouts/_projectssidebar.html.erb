@@ -13,9 +13,9 @@
 	  	<% User.find_by_id(session[:user_id]).projects.where(:isactive => true).where.not(:name => 'No Project').order(:name).all.each do |project| %>
 				<li role="presentation" data-toggle="tooltip" data-placement="bottom" title="Todos: <%= project.todos.count %>" <% if project.slug == session[:active_project]%> class ="tab-pane fade in active" <% else %> class ="tab-pane fade in"<% end %> >
 				<%= link_to project, remote: true do %>
-					<span class="badge"><%= project.todos.count %></span>
+					<span class="badge"><%= project.todos.joins(:status).where("curdate() >= todos.duedate and statuses.complete = false").count %></span>
 					<%= project.name.titleize %> 
-					<% if project.todos.where('curdate() > duedate').count > 1 %>
+					<% if project.todos.joins(:status).where("curdate() > todos.duedate and statuses.complete = false").count > 0 %>
 					<span class="glyphicon glyphicon-flag text-danger" aria-hidden="true"></span>
 					<% end %>
 					
