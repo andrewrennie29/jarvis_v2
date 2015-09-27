@@ -19,6 +19,8 @@ gem 'mysql2', '~> 0.3.18'
 # Amending action mailer
 #gem 'actionmailer', source: "http://rubygems.org"
 
+gem 'responders', '~> 2.0'
+
 #bootstrap
 gem 'bootstrap-sass', '~> 3.3.4'
 gem 'sass-rails', '>= 3.2'
