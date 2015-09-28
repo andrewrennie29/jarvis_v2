@@ -1,4 +1,4 @@
-	<div class="btn-group">
+<div class="btn-group">
   <a href="/projects" type="button" class="btn btn-default">Manage Projects</a>
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <span class="caret"></span>
@@ -24,6 +24,21 @@
 				</li>
 			<% end %>
 		<% end %>
+  </ul>
+</div>
+<p>
+<div class="btn-group">
+  <a href="#" type="button" class="btn btn-default">Categories</a>
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu">
+    <% unless session[:user_id].nil? %>
+	  <li role="presentation" <% if session[:active_project] == session[:user_id].to_s + '-no-project' %>  class ="active" <% else %> class ="tab-pane fade in"<% end %> data-toggle="tooltip" data-placement="bottom" title="Todos: "><a href="/categories/work" data-remote = "true">Work</a></li>
+	  <li role="presentation" <% if session[:active_project] == session[:user_id].to_s + '-no-project' %>  class ="active" <% else %> class ="tab-pane fade in"<% end %> data-toggle="tooltip" data-placement="bottom" title="Todos: "><a href="/categories/personal" data-remote = "true">Personal</a></li>
+	  <li role="presentation" <% if session[:active_project] == session[:user_id].to_s + '-no-project' %>  class ="active" <% else %> class ="tab-pane fade in"<% end %> data-toggle="tooltip" data-placement="bottom" title="Todos: "><a href="/categories/other" data-remote = "true">Other</a></li>
+	<% end %>
   </ul>
 </div>
 <hr>

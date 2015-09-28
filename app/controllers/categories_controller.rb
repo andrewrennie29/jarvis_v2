@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1.json
   def show
     unless session[:user_id].nil?
-      @categorytodos = User.find_by_id(session[:user_id]).todos.joins(:category, :status).where('categories.name = ?', params[:name]).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
+      @todos = User.find_by_id(session[:user_id]).todos.joins(:category, :status).where('categories.name = ?', params[:name].titleize).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
     end
   end
 
