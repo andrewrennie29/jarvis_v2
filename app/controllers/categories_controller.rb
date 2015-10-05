@@ -12,6 +12,8 @@ class CategoriesController < ApplicationController
   def show
     unless session[:user_id].nil?
       @todos = User.find_by_id(session[:user_id]).todos.joins(:category, :status).where('categories.name = ?', params[:name].titleize).order('statuses.complete asc, todos.assigneddate asc, todos.duedate asc, todos.name asc')
+      @projectstatus = @todos.statusobjects(user_id: session[:user_id])
+      session[:active_project] = nil
     end
   end
 
