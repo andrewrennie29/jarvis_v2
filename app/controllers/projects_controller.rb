@@ -65,6 +65,12 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def toggleactive
+    p = Project.find_by_slug(params[:project_slug])
+    puts p
+    p.toggle_active
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project

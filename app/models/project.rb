@@ -16,6 +16,10 @@ class Project < ActiveRecord::Base
 		self.update(:next_id => self.next_id + 1)
 	end
 
+	def toggle_active
+		self.update(:isactive => !self.isactive)
+	end
+
 private
 	def create_slug
 		self.slug = [user_id, name.parameterize].join("-")

@@ -2,25 +2,27 @@
   <h1>Projects</h1>
   <%= link_to 'Create New Project', new_project_path, remote: true %>
 </div>
-
-<% @projects.each do |project| %>
-
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title"><%= project.name.titleize %> <br><small><%= project.description %></small></br></h3>
-    <%= link_to 'Edit', edit_project_path(project), remote: true %> <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %>
-  </div>
-  <div class="panel-body">
-    <% if project.todos.count == 0 %>
-      There are no todos for this project.
-    <% else %>
-      <% project.todos.each do |todo| %>
-        <%= render partial: 'todos/item', locals: { todo: todo } %>
+<table class="table table-hover">
+  <thead>
+  <tr>
+  <th>Project</th>
+  <th>Active</th>
+  </tr>
+  </thead>
+  <% @projects.each do |project| %>
+  <tr>
+  <td><%= link_to project.name.titleize, edit_project_path(project), remote: true %> <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %><br><small><%= project.description %></small></br></td>
+  <td>
+    <%= link_to project_toggleactive_path(project), remote: true do %>
+      <% if project.isactive == true %>
+        <span class="label label-success">Active</span>
+      <% else %>
+        <span class="label label-danger">Inactive</span>
       <% end %>
     <% end %>
-  </div>
-</div>
+  </td>
+  </tr>
 
-<% end %>
+  <% end %>
 
-
+</table>

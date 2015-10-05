@@ -9,8 +9,10 @@ Rails.application.routes.draw do
 
   resources :categories, param: :name
 
-  resources :projects, param: :slug
-
+  resources :projects, param: :slug do
+    put 'toggleactive'
+    get 'toggleactive'
+  end
   resources :recurs
 
   resources :sessions
