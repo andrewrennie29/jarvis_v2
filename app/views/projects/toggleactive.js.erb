@@ -1,0 +1,1 @@
+$('#<%= @project.id %>').html("<%= escape_javascript(render partial: 'projects/projectitem', locals: { project: @project }) %>");

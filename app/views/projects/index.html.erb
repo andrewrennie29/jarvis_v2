@@ -10,17 +10,8 @@
   </tr>
   </thead>
   <% @projects.each do |project| %>
-  <tr>
-  <td><%= link_to project.name.titleize, edit_project_path(project), remote: true %> <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %><br><small><%= project.description %></small></br></td>
-  <td>
-    <%= link_to project_toggleactive_path(project), remote: true do %>
-      <% if project.isactive == true %>
-        <span class="label label-success">Active</span>
-      <% else %>
-        <span class="label label-danger">Inactive</span>
-      <% end %>
-    <% end %>
-  </td>
+  <tr id = <%= project.id %> >
+    <%= render partial: 'projects/projectitem', locals: { project: project } %> 
   </tr>
 
   <% end %>
