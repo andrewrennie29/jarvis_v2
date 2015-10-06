@@ -1,4 +1,4 @@
-<td><%= link_to project.name.titleize, edit_project_path(project), remote: true %> <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %><br><small><%= project.description %></small></br></td>
+<td><%= link_to project.name.titleize, edit_project_path(project), remote: true %> <%= link_to '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>'.html_safe, project, method: :delete, data: { confirm: 'Are you sure?' } %><br><small><%= project.description %></small></br></td>
 <td>
 	<%= link_to project_toggleactive_path(project), remote: true do %>
 	  <% if project.isactive == true %>
